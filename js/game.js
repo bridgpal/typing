@@ -5,14 +5,14 @@ var box, message, score;
 
 function placeLetter() {
     var letter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
-    var thing = document.createElement("div");
-    thing.innerHTML = letter;
-    thing.className = letter;
+    var newLetter = document.createElement("div");
+    newLetter.innerHTML = letter;
+    newLetter.className = letter;
 
-    thing.style.top = Math.random() * 300 + "px";
-    thing.style.right = 1000 - (Math.random() * 500) + "px";
+    newLetter.style.top = Math.random() * 300 + "px";
+    newLetter.style.right = 1000 - (Math.random() * 500) + "px";
 
-    box.appendChild(thing);
+    box.appendChild(newLetter);
 }
 
 function moveLetters() {
