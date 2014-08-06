@@ -1,7 +1,7 @@
 var placeLetterInterval = 500;
 var placeLetterTimer, moveLettersTimer;
 var startButton, resetButton;
-var message;
+var box, message, score;
 
 function placeLetter() {
     var letter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
@@ -12,7 +12,7 @@ function placeLetter() {
     thing.style.top = Math.random() * 300 + "px";
     thing.style.right = 1000 - (Math.random() * 500) + "px";
 
-    document.getElementById('box').appendChild(thing);
+    box.appendChild(thing);
 }
 
 function moveLetters() {
@@ -45,6 +45,7 @@ function endGame() {
 function resetGame() {
     message.classList.add("hidden");
     resetButton.classList.add("disabled")
+    score.innerHTML = 0;
 
     var boxes = document.querySelectorAll("#box > div");
     for (var i = 0; i < boxes.length; i++) {
@@ -61,7 +62,6 @@ function keyboardInput() {
 
     var key = String.fromCharCode(event.keyCode).toLowerCase();
     var boxes = document.getElementsByClassName(key);
-    var score = document.getElementById("score");
 
     if (boxes[0]) {
         boxes[0].remove();
@@ -85,6 +85,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     console.log("OH HAI THERE!");
 
     message = document.getElementById('message');
+    box = document.getElementById('box');
+    score = document.getElementById("score");
 
     startButton = document.getElementById('start')
     startButton.onclick = startGame;
