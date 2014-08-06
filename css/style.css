@@ -47,3 +47,11 @@
 {
   padding:0;
 }
+
+.btn {
+  margin-right: 10px;
+}
+
+.container {
+  max-width: 1000px;
+}

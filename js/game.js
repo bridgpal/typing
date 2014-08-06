@@ -1,3 +1,8 @@
+var placeLetterInterval = 500;
+var placeLetterTimer, moveLettersTimer;
+var startButton, resetButton;
+var message;
+
 function placeLetter() {
     var letter = String.fromCharCode(97 + Math.floor(Math.random() * 26));
     var thing = document.createElement("div");
@@ -32,7 +37,21 @@ function endGame() {
     clearInterval(moveLettersTimer);
     clearInterval(placeLetterTimer);
     document.removeEventListener('keydown', keyboardInput);
-    document.getElementById('message').classList.remove("hidden");
+    message.classList.remove("hidden");
+    resetButton.classList.remove("disabled")
+}
+
+
+function resetGame() {
+    message.classList.add("hidden");
+    resetButton.classList.add("disabled")
+
+    var boxes = document.querySelectorAll("#box > div");
+    for (var i = 0; i < boxes.length; i++) {
+        boxes[i].remove();
+    }
+
+    startGame();
 }
 
 function keyboardInput() {
@@ -54,9 +73,22 @@ function keyboardInput() {
 
 }
 
-document.addEventListener('keydown', keyboardInput);
 
-console.log("OH HAI THERE!");
-var placeLetterInterval = 500;
-var placeLetterTimer = setInterval(placeLetter, placeLetterInterval);
-var moveLettersTimer = setInterval(moveLetters, 100);
+function startGame() {
+    placeLetterTimer = setInterval(placeLetter, placeLetterInterval);
+    moveLettersTimer = setInterval(moveLetters, 100);
+    document.addEventListener('keydown', keyboardInput);
+    startButton.classList.add("disabled");
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    console.log("OH HAI THERE!");
+
+    message = document.getElementById('message');
+
+    startButton = document.getElementById('start')
+    startButton.onclick = startGame;
+
+    resetButton = document.getElementById('reset')
+    resetButton.onclick = resetGame;
+});
