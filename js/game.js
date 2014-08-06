@@ -31,12 +31,13 @@ function decreaseLetterSpeed(score) {
 function endGame() {
     clearInterval(moveLettersTimer);
     clearInterval(placeLetterTimer);
+    document.removeEventListener('keydown', keyboardInput);
     document.getElementById('message').classList.remove("hidden");
 }
 
-document.addEventListener('keydown', function(event) {
+function keyboardInput() {
     if (event.keyCode === 27) {
-        endGame();
+        return endGame();
     };
 
     var key = String.fromCharCode(event.keyCode).toLowerCase();
@@ -51,7 +52,9 @@ document.addEventListener('keydown', function(event) {
         score.innerHTML = parseInt(score.innerHTML) - 1;
     }
 
-});
+}
+
+document.addEventListener('keydown', keyboardInput);
 
 console.log("OH HAI THERE!");
 var placeLetterInterval = 500;
